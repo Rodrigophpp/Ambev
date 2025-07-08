@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="TaskExtract"
   DTS:PackageType="5"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{E562DB19-E1B3-4FA0-A217-4B8BE0F066CC}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{5C12D513-9754-470D-AA4A-EE959623171C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -79,6 +79,40 @@
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Falha"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarefa Executar SQL"
+      DTS:DTSID="{8C551101-8206-4978-91E8-12F1E936F40D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Falha"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0D7E8E3B-174C-4CFB-8A4D-D4B1AFAA3C57}"
+          SQLTask:SqlStatementSource="--Sucesso&#xA;insert into extr.Logs&#xA;&#xA;select &#xA;       'extr'&#xA;&#x9;  ,'MetadadosCervejaria'&#xA;&#x9;  ,'Falha'&#xA;&#x9;  ,getdate()" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sucesso"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarefa Executar SQL"
+      DTS:DTSID="{47444BDA-41C1-4AFB-B720-4492103B5D42}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sucesso"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0D7E8E3B-174C-4CFB-8A4D-D4B1AFAA3C57}"
+          SQLTask:SqlStatementSource="--Sucesso&#xA;insert into extr.Logs&#xA;&#xA;select &#xA;       'extr'&#xA;&#x9;  ,'MetadadosCervejaria'&#xA;&#x9;  ,'Sucesso'&#xA;&#x9;  ,getdate()" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\TaskExtract"
       DTS:CreationName="STOCK:SEQUENCE"
@@ -1765,6 +1799,25 @@ where [refTable].[id] = ?</property>
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
   </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restrição]"
+      DTS:CreationName=""
+      DTS:DTSID="{463B1230-62C9-4744-A563-6003F44E24D1}"
+      DTS:From="Package\TaskExtract"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restrição"
+      DTS:To="Package\Sucesso" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restrição 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{3D643AA8-EA1C-4910-86B4-B409B5480900}"
+      DTS:From="Package\TaskExtract"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restrição 1"
+      DTS:To="Package\Falha"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
 <!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
@@ -1776,7 +1829,7 @@ where [refTable].[id] = ?</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="184,42"
           Id="Package\TaskExtract\Loop For\MetadadosCervejaria"
@@ -1787,25 +1840,25 @@ where [refTable].[id] = ?</property>
           PanelSize="262,112"
           Size="262,155"
           Id="Package\TaskExtract\Loop For"
-          TopLeft="28,108" />
+          TopLeft="5.5,107.5" />
         <NodeLayout
           Size="168,42"
           Id="Package\TaskExtract\Pega Ultima Page"
-          TopLeft="72,16" />
+          TopLeft="52.5,5.5" />
         <EdgeLayout
           Id="Package\TaskExtract.PrecedenceConstraints[Restrição]"
-          TopLeft="157.5,58">
+          TopLeft="136.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,50"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,42.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,42.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1817,10 +1870,88 @@ where [refTable].[id] = ?</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="323,353"
-          Size="323,396"
+          PanelSize="273,318"
+          Size="273,360"
           Id="Package\TaskExtract"
           TopLeft="25,27" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\Sucesso"
+          TopLeft="394,71" />
+        <NodeLayout
+          Size="107,42"
+          Id="Package\Falha"
+          TopLeft="392,136" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restrição 1]"
+          TopLeft="298,265.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="94,-108.666666666667"
+              Start="0,0"
+              End="86.5,-108.666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="33.8495575221239,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.8495575221239,0"
+                    Point2="37.8495575221239,0"
+                    Point3="37.8495575221239,-4" />
+                  <mssgle:LineSegment
+                    End="37.8495575221239,-104.666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37.8495575221239,-104.666666666667"
+                    Point2="37.8495575221239,-108.666666666667"
+                    Point3="41.8495575221239,-108.666666666667" />
+                  <mssgle:LineSegment
+                    End="86.5,-108.666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="25.7411981471239,1,24.21671875,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restrição]"
+          TopLeft="298,148.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96,-56.3333333333333"
+              Start="0,0"
+              End="88.5,-56.3333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="34.6548672566372,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="34.6548672566372,0"
+                    Point2="38.6548672566372,0"
+                    Point3="38.6548672566372,-4" />
+                  <mssgle:LineSegment
+                    End="38.6548672566372,-52.3333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="38.6548672566372,-52.3333333333333"
+                    Point2="38.6548672566372,-56.3333333333333"
+                    Point3="42.6548672566372,-56.3333333333333" />
+                  <mssgle:LineSegment
+                    End="88.5,-56.3333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
