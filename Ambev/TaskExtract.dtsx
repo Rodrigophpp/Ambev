@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="TaskExtract"
   DTS:PackageType="5"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{481FF6BD-BDC3-4977-8747-2044851F1280}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{E562DB19-E1B3-4FA0-A217-4B8BE0F066CC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1734,7 +1734,6 @@ where [refTable].[id] = ?</property>
           DTS:refId="Package\TaskExtract\Pega Ultima Page"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Tarefa Executar SQL"
-          DTS:Disabled="True"
           DTS:DTSID="{8193A809-04FC-46F2-ACA6-3E16E32970D6}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
