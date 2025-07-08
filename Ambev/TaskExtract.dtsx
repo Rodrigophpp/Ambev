@@ -1,0 +1,1956 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/7/2025 8:24:42 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-4A6UT0U9"
+  DTS:CreatorName="LAPTOP-4A6UT0U9\rodri"
+  DTS:DTSID="{86621849-47B4-450F-925A-A53DC0A9E985}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="TaskExtract"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{18037144-631B-403B-8747-50CF25C89804}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0D7E8E3B-174C-4CFB-8A4D-D4B1AFAA3C57}"
+      DTS:ObjectName="LocalHost">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-4A6UT0U9\SQLEXPRESS;Initial Catalog=DadosAmbev;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-TaskExtract-{0D7E8E3B-174C-4CFB-8A4D-D4B1AFAA3C57}LAPTOP-4A6UT0U9\SQLEXPRESS.DadosAmbev;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{505FCDF3-5D5B-4240-A654-FA9271E4595B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::Var_rest]+&quot;/v1/breweries?&quot;+&quot;page=&quot;+ (DT_STR, 10, 1252) @[User::Var_page]+&quot;&amp;per_page=&quot;+ (DT_STR, 10, 1252)  @[User::Var_size]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Var_endpoint">
+      <DTS:VariableValue
+        DTS:DataType="8">https://api.openbrewerydb.org/v1/breweries?page=1&amp;per_page=50</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{01AB9358-7503-4246-856D-C7EE84CB82F1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Var_max_page">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4C6B5B7C-8717-4F5C-A91F-81B93748A698}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Var_page">
+      <DTS:VariableValue
+        DTS:DataType="3">1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D9CB6B1F-FE2E-4679-9AB2-05609F6F7B04}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Var_rest">
+      <DTS:VariableValue
+        DTS:DataType="8">https://api.openbrewerydb.org</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6F63E40C-8EFD-4597-A0B3-7C21AF9075B2}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Var_size">
+      <DTS:VariableValue
+        DTS:DataType="3">50</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\TaskExtract"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Contêiner da Sequência"
+      DTS:DTSID="{B6E3F7FE-9301-4C58-BB75-04B75D54C35A}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TaskExtract">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\TaskExtract\Loop For"
+          DTS:AssignExpression="@Var_page = @Var_page +1"
+          DTS:CreationName="STOCK:FORLOOP"
+          DTS:Description="Contêiner do Loop For"
+          DTS:DTSID="{66F4235F-C3DF-4540-B62D-63D4CB10CB9F}"
+          DTS:EvalExpression="@Var_page &lt;= @Var_max_page"
+          DTS:ExecutableType="STOCK:FORLOOP"
+          DTS:LocaleID="-1"
+          DTS:MaxConcurrent="1"
+          DTS:ObjectName="Loop For">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\TaskExtract\Loop For\MetadadosCervejaria"
+              DTS:CreationName="Microsoft.Pipeline"
+              DTS:Description="Tarefa Fluxo de Dados"
+              DTS:DTSID="{9D5BA090-03A2-4207-A2FB-0E4B8DC3630F}"
+              DTS:ExecutableType="Microsoft.Pipeline"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="MetadadosCervejaria"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia"
+                      componentClassID="Microsoft.Lookup"
+                      contactInfo="Pesquisa;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;6"
+                      description="Une colunas adicionais aos fluxos de dados pesquisando valores de uma tabela. Por exemplo, una à coluna 'employee id' a tabela de funcionários para obter 'hire date' e 'employee name'. Essa transformação é recomendada quando a tabela de pesquisa está de acordo com a memória."
+                      name="Checa Existencia"
+                      usesDispositions="true"
+                      version="6">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Especifica a instrução SQL que gera a tabela de pesquisa."
+                          expressionType="Notify"
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select 
+        id
+
+from [extr].[MetadadosCervejaria] with(nolock)</property>
+                        <property
+                          dataType="System.String"
+                          description="Especifica uma instrução SQL que usa parâmetros para gerar a tabela de pesquisa."
+                          expressionType="Notify"
+                          name="SqlCommandParam"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select 
+        id
+
+from [extr].[MetadadosCervejaria] with(nolock)) [refTable]
+where [refTable].[id] = ?</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica o tipo de conexão usado para acessar o conjunto de dados de referência."
+                          name="ConnectionType"
+                          typeConverter="LookupConnectionType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica o tipo de cache da tabela de pesquisa."
+                          name="CacheType"
+                          typeConverter="CacheType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica como a transformação Pesquisa trata as linhas sem entradas correspondentes no conjunto de dados de referência."
+                          name="NoMatchBehavior"
+                          typeConverter="LookupNoMatchBehavior">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica a porcentagem do cache alocada para linhas sem entradas correspondentes no conjunto de dados de referência."
+                          name="NoMatchCachePercentage">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Uso Máximo de Memória para o Cache de Referência em uma plataforma de 32 bits."
+                          name="MaxMemoryUsage">25</property>
+                        <property
+                          dataType="System.Int64"
+                          description="Uso Máximo de Memória para o Cache de Referência em uma plataforma de 64 bits."
+                          name="MaxMemoryUsage64">25</property>
+                        <property
+                          dataType="System.String"
+                          description="Indica se os metadados de referência em um formato XML devem ser referenciados."
+                          name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="id" dataType="DT_STR" length="46" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Especifica a lista de identificadores de linhagem mapeados para os parâmetros usados pela instrução SQL na propriedade SQLCommand. As entradas na lista são separadas por ponto e vírgulas."
+                          name="ParameterMap">#{Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Id]};</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Determina se as chaves duplicadas nos dados de referência devem ser tratadas como erros quando o modo de cache cheio é usado."
+                          name="TreatDuplicateKeysAsError">false</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[LocalHost]"
+                          connectionManagerRefId="Package.ConnectionManagers[LocalHost]"
+                          description="O gerenciador de conexões usado para acessar dados de pesquisa."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Inputs[Entrada de Pesquisa]"
+                          name="Entrada de Pesquisa">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Inputs[Entrada de Pesquisa].Columns[Id]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="46"
+                              cachedName="Id"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Id]">
+                              <properties>
+                                <property
+                                  dataType="System.String"
+                                  description="Especifica a coluna na tabela de referência que uma coluna une."
+                                  name="JoinToReferenceColumn">id</property>
+                                <property
+                                  dataType="System.Null"
+                                  description="Especifica a coluna na tabela de referência a partir da qual uma coluna é copiada."
+                                  name="CopyFromReferenceColumn" />
+                              </properties>
+                            </inputColumn>
+                          </inputColumns>
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Outputs[Saída de Correspondência de Pesquisa]"
+                          errorOrTruncationOperation="Pesquisa"
+                          exclusionGroup="1"
+                          name="Saída de Correspondência de Pesquisa"
+                          synchronousInputId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Inputs[Entrada de Pesquisa]">
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Outputs[Saída Sem Correspondência de Pesquisa]"
+                          description="A saída de Pesquisa que trata as linhas sem entradas correspondentes no conjunto de dados de referência. Use essa saída quando a propriedade NoMatchBehavior estiver definida como &quot;Enviar as linhas sem entradas correspondentes para a saída sem correspondência&quot;."
+                          exclusionGroup="1"
+                          name="Saída Sem Correspondência de Pesquisa"
+                          synchronousInputId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Inputs[Entrada de Pesquisa]">
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Outputs[Saída de Erro de Pesquisa]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Saída de Erro de Pesquisa"
+                          synchronousInputId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Inputs[Entrada de Pesquisa]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Outputs[Saída de Erro de Pesquisa].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Outputs[Saída de Erro de Pesquisa].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Outputs[Saída de Erro de Pesquisa].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Outputs[Saída de Erro de Pesquisa].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada"
+                      componentClassID="Microsoft.DerivedColumn"
+                      contactInfo="Coluna Derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+                      description="Cria novos valores de coluna aplicando expressões a colunas de entrada da transformação. Crie novas colunas ou substitua as existentes. Por exemplo, concatene os valores das colunas 'first name' e 'last name' para formar uma coluna 'full name'."
+                      name="Coluna Derivada"
+                      usesDispositions="true">
+                      <inputs>
+                        <input
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Inputs[Entrada de Coluna Derivada]"
+                          description="Entrada para a Transformação Coluna Derivada"
+                          name="Entrada de Coluna Derivada">
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada]"
+                          description="Saída Padrão da Transformação Coluna Derivada"
+                          exclusionGroup="1"
+                          name="Saída de Coluna Derivada"
+                          synchronousInputId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Inputs[Entrada de Coluna Derivada]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada].Columns[EndPoint]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Computação"
+                              errorRowDisposition="FailComponent"
+                              length="73"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada].Columns[EndPoint]"
+                              name="EndPoint"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Expressão de Coluna Derivada"
+                                  name="Expression">(DT_STR,73,1252)@[User::Var_endpoint]</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Expressão Amigável de Coluna Derivada"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">(DT_STR,73,1252)@[User::Var_endpoint]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada].Columns[Page]"
+                              dataType="i4"
+                              errorOrTruncationOperation="Computação"
+                              errorRowDisposition="FailComponent"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada].Columns[Page]"
+                              name="Page"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Expressão de Coluna Derivada"
+                                  name="Expression">@[User::Var_page]</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Expressão Amigável de Coluna Derivada"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">@[User::Var_page]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada].Columns[Size]"
+                              dataType="i4"
+                              errorOrTruncationOperation="Computação"
+                              errorRowDisposition="FailComponent"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada].Columns[Size]"
+                              name="Size"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Expressão de Coluna Derivada"
+                                  name="Expression">@[User::Var_size]</property>
+                                <property
+                                  containsID="true"
+                                  dataType="System.String"
+                                  description="Expressão Amigável de Coluna Derivada"
+                                  expressionType="Notify"
+                                  name="FriendlyExpression">@[User::Var_size]</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                        <output
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Erro de Coluna Derivada]"
+                          description="Saída de Erro da Transformação Coluna Derivada"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Saída de Erro de Coluna Derivada"
+                          synchronousInputId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Inputs[Entrada de Coluna Derivada]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Erro de Coluna Derivada].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File)"
+                      componentClassID="Microsoft.ManagedComponentHost"
+                      contactInfo="JSON Source (REST API or File); ZappySys LLC (c) All Rights Reserved; SSIS PowerPack; http://www.zappysys.com/support"
+                      description="The JSON source is used to read data from JSON files, RESTful Web Service or direct JSON String."
+                      name="JSON Source (REST API or File)"
+                      usesDispositions="true"
+                      version="38">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="LoggingMode determines how much information is logged during Package Execution. Set Logging mode to Debugging for maximum log."
+                          expressionType="Notify"
+                          name="LoggingMode"
+                          typeConverter="ZappySys.PowerPack.Common.LoggingMode">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When you enable this property it will prefix timestamp before Log messages."
+                          expressionType="Notify"
+                          name="PrefixTimestamp">false</property>
+                        <property
+                          dataType="System.Null"
+                          expressionType="Notify"
+                          name="SelfRef"
+                          typeConverter="NOTBROWSABLE" />
+                        <property
+                          dataType="System.Boolean"
+                          description="Treat empty string as NULL for any numeric data types"
+                          expressionType="Notify"
+                          name="TreatBlankNumberAsNull">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Treat empty string as NULL for bool data types"
+                          expressionType="Notify"
+                          name="TreatBlankBoolAsNull">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Treat empty string as NULL for any date/time data types"
+                          expressionType="Notify"
+                          name="TreatBlankDateAsNull">true</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Encoding of source file"
+                          expressionType="Notify"
+                          name="Encoding"
+                          typeConverter="ZappySys.Common.EncodingType">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Character set for text (e.g. windows-1250 )"
+                          expressionType="Notify"
+                          name="CharacterSet"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Maximum JSON records to fetch. Set this value to 0 for all records"
+                          expressionType="Notify"
+                          name="MaxRows">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enables custom search / replace in the document text after its read from the file/url or direct string. This replace operation happens before its parsed. This option can be useful for custom escape sequence in source document which is causing issue in the parser. You can replace such unwanted characters fore parser starts parsing the text."
+                          expressionType="Notify"
+                          name="EnableCustomReplace">false</property>
+                        <property
+                          dataType="System.String"
+                          description="String you like to search for (Only valid when EnableCustomReplace option is turned on). If you want to enable Regular Expression pattern search then add --regex or --regex-ic (for case-insensitive search)  at the end of your search string (e.g. ORDER-\d+--regex OR ORDER-\d+--regex-ic (case-insensitive search) ) "
+                          expressionType="Notify"
+                          name="SearchFor"></property>
+                        <property
+                          dataType="System.String"
+                          description="String you like to replace with (Only valid when EnableCustomReplace option is turned on). If you added --regex or --regex-ic at the end of your SearchFor string then ReplaceWith can use special placeholders (i.e. $1, $2...) based on regular expression groups. For example you SearchFor=(\w+)(@\w+.com) to search for emails then to mask emails you can something like this for ReplaceWith = ****$2 (where $2 is domain part and $1 is before @)"
+                          expressionType="Notify"
+                          name="ReplaceWith"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Defines how to read the JSON file or direct string"
+                          expressionType="Notify"
+                          name="AccessMode"
+                          typeConverter="ZappySys.Common.Ssis.FileValueAccessMode">2</property>
+                        <property
+                          dataType="System.String"
+                          description="Defines how to read the JSON file or direct string or command line output. If you like to read from command line then simply prefix any valid command line with cmd:&gt;. Here is more information about streaming data from command line output. Syntax: cmd:&gt;[exe / bat folder]&lt;exe-name&gt; [arguments]&#xA;First argument is exe name or full path for exe or bat file. Second part is arguments for command line program. You can use double quotes around exe / batch file path if it contains space.&#xA;For *.bat or *.cmd file make sure to add [ @echo off ] in the first line (without brackets) else command itself is added in output. To read more please see product help file&#xA;&#xA;====================&#xA;Examples:&#xA;====================&#xA;cmd:&gt;cmd /c dir *.dll /b&#xA;cmd:&gt;aws iam list-users --output json&#xA;cmd:&gt;az vm list --output json&#xA;cmd:&gt;py c:\scripts\run-python.py&#xA;cmd:&gt;powershell -executionpolicy bypass -File &quot;c:\scrips\run.ps1&quot;&#xA;cmd:&gt;powershell -executionpolicy bypass -Command &quot;[System.IO.StreamReader]::new((Invoke-WebRequest -URI https://zappysys.com/downloads/files/test/invoices.json).RawContentStream).ReadToEnd()&quot;&#xA;cmd:&gt;c:\folder\my-batch-file.bat&#xA;cmd:&gt;c:\folder\my-batch-file.bat option1 option2&#xA;cmd:&gt;curl -k https://httpbin.org/get&#xA;cmd:&gt;curl.exe -k https://httpbin.org/get&#xA;cmd:&gt;c:\folder\curl.exe -k https://httpbin.org/get&#xA;cmd:&gt;&quot;c:\folder with space\curl.exe&quot; -k https://httpbin.org/get&#xA;"
+                          expressionType="Notify"
+                          name="DirectValue"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.String"
+                          description="Variable name which holds JSON string"
+                          expressionType="Notify"
+                          name="ValueVariable"
+                          typeConverter="ZappySys.PowerPack.Converters.VariableEditor,ZappySys.PowerPack160.UI,Version=1.0.0.0,Culture=neutral,PublicKeyToken=1903265a93eae502"></property>
+                        <property
+                          dataType="System.String"
+                          description="Variable name which holds data file path or url"
+                          expressionType="Notify"
+                          name="PathVariable"
+                          typeConverter="ZappySys.PowerPack.Converters.VariableEditor,ZappySys.PowerPack160.UI,Version=1.0.0.0,Culture=neutral,PublicKeyToken=1903265a93eae502"></property>
+                        <property
+                          dataType="System.String"
+                          description="JSON file path (e.g. c:\data\myfile.json) or pattern to process multiple files (e.g. c:\data\*.json)"
+                          expressionType="Notify"
+                          name="DirectPath"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">{{User::Var_endpoint}}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Include files from sub folders too."
+                          expressionType="Notify"
+                          name="Recursive">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enable this option to treat DirectPath as list of paths / urls (separated by new line or double colon :: ). This option is very useful if you have many URLs / Paths with similar data structure and you want to return response from all URLs in one step (UNION all URLs with single dataset). Examples:  http://someurl1::http://someurl2 --OR-- c:\file1::c:\file2 --OR-- c:\file1::https://someurl"
+                          expressionType="Notify"
+                          name="EnableMultiPathMode">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="By default process stops with error if specified local file is not found. Set this property to true if you wish to continue rather than throwing file not found error."
+                          expressionType="Notify"
+                          name="ContinueOnFileNotFoundError">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Set this if you want to set custom Http headers. You may use variable anywhere in the header value using syntax {{User::YourVarName}}. Syntax of Header key value pair is : &amp;lt;request&amp;gt;&amp;lt;header&amp;gt;&amp;lt;name&amp;gt;x-myheader-1&amp;lt;/name&amp;gt;&amp;lt;value&amp;gt;AAA&amp;lt;/value&amp;gt;&amp;lt;/header&amp;gt; &amp;lt;header&amp;gt;&amp;lt;name&amp;gt;x-myheader-2&amp;lt;/name&amp;gt;&amp;lt;value&amp;gt;BBB&amp;lt;/value&amp;gt;&amp;lt;/header&amp;gt;&amp;lt;/request&amp;gt;"
+                          expressionType="Notify"
+                          name="HttpHeaders">&lt;request&gt;&lt;header&gt;&lt;name&gt;Accept&lt;/name&gt;&lt;value&gt;*/*&lt;/value&gt;&lt;/header&gt;&lt;header&gt;&lt;name&gt;Cache-Control&lt;/name&gt;&lt;value&gt;no-cache&lt;/value&gt;&lt;/header&gt;&lt;/request&gt;</property>
+                        <property
+                          dataType="System.String"
+                          description="User defined data you wish to send along with your HTTP Request (e.g. Upload file data, Form POST data). Usually you have to set content-type of your data but if you select RequestMethod=POST then system will automatically set content-type=application/x-www-form-urlencoded."
+                          expressionType="Notify"
+                          name="HttpRequestData"></property>
+                        <property
+                          dataType="System.String"
+                          description="Http Web Request Method (e.g. POST, GET, PUT, LIST, DELETE...). Refer your API documentation if you are not sure which method you have to use."
+                          expressionType="Notify"
+                          name="HttpRequestMethod">GET</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies content type for data you wish to POST. If you select Default option then system default content type will be used (i.e. application/x-www-form-urlencoded). If you specify Content-Type header along with this option then header value takes precedence."
+                          expressionType="Notify"
+                          name="HttpRequestContentType"
+                          typeConverter="ZappySys.Common.Web.HttpRequestContentType">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this option if you want to upload file(s) (i.e. POST RAW file data) or send data using Multi-Part encoding method (i.e. Content-Type: multipart/form-data). Multi-Part request allows you to mix key/value and upload files in same request. On the other hand raw upload allows only single file upload (without any key/value) &#xA;&#xA;==== Raw Upload (Content-Type: application/octet-stream) =====   &#xA;To upload single file in raw mode check this option and specify full file path starting with @ sign in the Body (e.g.  @c:\data\myfile.zip ) &#xA;&#xA;==== Form-Data / Multipart Upload (Content-Type: multipart/form-data) =====   &#xA;To treat your Request data as multi part fields you must specify key/value pairs separated by new lines into RequestData field (i.e. Body). Each key value pair is entered on new-line and key/value are separated using equal sign (=). Preceding and trailing spaces are ignored also blank lines are ignored. &#xA;If field value has some any special character(s) then use escape sequence (e.g. For NewLine: \r\n, For Tab: \t, For at (@): \@). When value of any field starts with at sign (@) its automatically treated as File you want to upload. By default file content type is determined based on extension however you can supply content type manually for any field using this way [ YourFileFieldName.Content-Type=some-content-type ]. By default File Upload Field always includes Content-Type in the request (non file fields do not have content-type by default unless you supply manually). For some reason if you dont want to use Content-Type header in your request then supply blank Content-Type to exclude this header altogather [e.g. SomeFieldName.Content-Type= ]. In below example we have supplied Content-Type for file2 and SomeField1, all other fields are using default content-type.&#xA;See below Example of uploading multiple files along with additional fields. If some API requires you to pass Content-Type: multipart/form-data rather than multipart/form-data then manually set Request Header =&gt; Content-Type: multipart/mixed (it must starts with multipart/ else will be ignored). &#xA;&#xA;file1=@c:\data\Myfile1.txt&#xA;file2=@c:\data\Myfile2.json&#xA;file2.Content-Type=application/json&#xA;SomeField1=aaaaaaa&#xA;SomeField1.Content-Type=text/plain&#xA;SomeField2=12345&#xA;SomeFieldWithNewLineAndTab=This is line1\r\nThis is line2\r\nThis is \ttab \ttab \ttab&#xA;SomeFieldStartingWithAtSign=\@MyTwitterHandle&#xA;"
+                          expressionType="Notify"
+                          name="IsMultiPartUpload">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="By default when redirect happens (i.e. HTTP Code 301, 302, 307 and 308) to a different Host (domain or IP) then it removes the authorization header before redirecting to a new Host. If you trust the new host and you like to pass credentials after redirect then set this option. Without setting this option your HTTP request might fail."
+                          expressionType="Notify"
+                          name="AllowAuthRedirectToAnyDomain">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Data format coming from HTTP Response. This is useful for example when you have OData service and you want to automatically consume all pages of data using odata.netUrl. Setting JsonFormat=Odata will automatically do it for you. This setting is only applicable if JSON is coming from HTTP WebRequest."
+                          expressionType="Notify"
+                          name="JsonFormat"
+                          typeConverter="ZappySys.Json.JsonFormat">1</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enable custom proxy settings (If this is not set then system default proxy will be used. To disable proxy totally uncheck this option and check DoNotUseDefaultProxy option if available)"
+                          expressionType="Notify"
+                          name="UseProxy">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Web URL of Proxy server (including port  if necessary). [e.g. http://myproxyserver:8080/]"
+                          expressionType="Notify"
+                          name="ProxyUrl"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enable passing userid and password to proxy server"
+                          expressionType="Notify"
+                          name="UseProxyCreds">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Proxy username"
+                          expressionType="Notify"
+                          name="ProxyUserName"></property>
+                        <property
+                          dataType="System.String"
+                          description="Proxy password"
+                          expressionType="Notify"
+                          name="ProxyPassword"></property>
+                        <property
+                          dataType="System.String"
+                          description="If Service response support pagination using some sort of next url attribute then specify which attribute name in JSON Response string which holds next url. If no attribute found or its null then component will stop fetching next resultset. Example: $.pagingInfo.nextUrl"
+                          expressionType="Notify"
+                          name="NextUrlAttribute"></property>
+                        <property
+                          dataType="System.String"
+                          description="If Service response support pagination using some sort of prev/next url attribute then specify which previous link attribute name from JSON Response string which holds previous url."
+                          expressionType="Notify"
+                          name="PrevUrlAttribute"></property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies value for NextUrlAttribute or StopIndicatorAttribute which indicates last page to stop pagination. If you have specified StopIndicatorAttribute then you can use Regular expression rather than static value to indicate last page. To use regular expression value of this property must start with regex= prefix. Example : regex=FALSE|N or use regex= to detect blank value or missing value (assuming you set StopIndicatorAttribute to something like $.hasMore)"
+                          expressionType="Notify"
+                          name="NextUrlStopIndicator"></property>
+                        <property
+                          dataType="System.String"
+                          description="Attribute name or expression for attribute which can be used as stop indicator (e.g. $.hasMore --OR-- $.pagination.hasMore --OR-- $.data[0].hasMore). If this value is blank then NextUrlAttribute is used"
+                          expressionType="Notify"
+                          name="StopIndicatorAttribute"></property>
+                        <property
+                          dataType="System.String"
+                          description="If you want to include certain text (or parameters) at the end of Next url then specify this attribute (e.g. &amp;format=json). Another common use case of this property is to supply pagination token to next Page URL. You can also use &lt;%nextlink%&gt; or  &lt;%nextlink_encoded%&gt; placeholder (e.g. &amp;cursor=&lt;%nextlink_encoded%&gt; )"
+                          expressionType="Notify"
+                          name="NextUrlSuffix"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="This property indicates total number of milliseconds you want to wait before sending next request. This option allows you to adjust how many API calls can be made within certain timeframe. If your API Service has no limit then set this option to zero"
+                          expressionType="Notify"
+                          name="NextUrlWait">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="If this option is true then component will continue without exception on 404 error (Url not found). This allows you to consume data gracefully."
+                          expressionType="Notify"
+                          name="ContinueOnUrlNotFoundError">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Continue when any type of exception occurs during http request"
+                          expressionType="Notify"
+                          name="ContineOnAnyError">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Continue on error when specified substring found in response"
+                          expressionType="Notify"
+                          name="ContineOnErrorForMessage">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Continue on error when specified status code returned from web server"
+                          expressionType="Notify"
+                          name="ContineOnErrorForStatusCode">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When error occurs no data is returned. Use this option to get content eventhough error occurs. When this option is checked you can't use [continue on error when specific string found in response] option"
+                          expressionType="Notify"
+                          name="ConsumeResponseOnError">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Status code to match when error occurs and ContineOnErrorForStatusCode option is true. If Response status code matches to this code then task continues to run"
+                          expressionType="Notify"
+                          name="ErrorStatusCodeToMatch">404</property>
+                        <property
+                          dataType="System.String"
+                          description="Status code(s) to match - separated by vertical bar (e.g. 404|405). When error occurs and ContineOnErrorForStatusCode option is true then if StatusCode matches to this code(s) then task continues to run"
+                          expressionType="Notify"
+                          name="ErrorStatusCodeToMatchRegex"></property>
+                        <property
+                          dataType="System.String"
+                          description="Error substring to match when error occurs and ContineOnErrorForMessage option is true. If Response status code matches to this code then task continues to run"
+                          expressionType="Notify"
+                          name="ErrorSubstringToMatch"></property>
+                        <property
+                          dataType="System.String"
+                          description="Cookie Container can be used to maintain state between multiple web requests. Example: You can login to site like wordpress and then extract any private page content by simply passing authentication cookies using this variable."
+                          expressionType="Notify"
+                          name="CookieContainerVariable"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Http request Timeout in seconds. Set this to 0 if you want to use system default value (i.e. 100 seconds)"
+                          expressionType="Notify"
+                          name="RequestTimeout">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies which security protocol is supported for HTTPS communication. Using this option you can enable legacy protocol or enforce to use latest version of security protocol (Note: TLS 1.2 is only supported in SSIS 2014 or Higher)."
+                          expressionType="Notify"
+                          name="SecurityProtocol"
+                          typeConverter="ZappySys.PowerPack.Common.HttpsSecurityProtocolType">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enable support for gzip or deflate compression (for deflate you must turn on [Tls 1.0 Or Higher] Option on Advanced Settings - Security Protocol for HTTPS). When you check this option compressed response automatically de-compressed saving bandwidth. This option is only valid if web server supports compressed response stream. Check your API documentation for more information."
+                          expressionType="Notify"
+                          name="EnableCompressionSupport">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Ignore SSL certificate related errors. Example: if you getting SSL/TLS errors because of certificate expired or certificate is not from trusted authority or certificate is self-signed. By checking this option you will not get SSL/TLS error."
+                          expressionType="Notify"
+                          name="IgnoreCertificateErrors">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Allow unsecure ciphers/suites and curves for SSLS/TLS communication. Use this option to communicate with web servers which needs legacy / unsecured ciphers support. This option is only trigged when you change default SSL/TLS Version on advanced settings tab."
+                          expressionType="Notify"
+                          name="AllowUnsecureSuite">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Use connection to pass credentials for authentication (e.g. Use UserID/Password or Use OAuth Protocol for token based approach)"
+                          expressionType="Notify"
+                          name="UseConnection">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specified how you want to loop through multiple pages returned by REST API."
+                          expressionType="Notify"
+                          name="PagingMode"
+                          typeConverter="ZappySys.Common.RestApiPagingMode">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="If you wish to pass extracted pagination token or current page number in the body of next request then set this option to true. You can use [$pagetoken$] and [$pagenumber$] placeholders anywhere in the Body where you wish to insert extracted Page token. If you must set encoded token then you can use &lt;%nextlink_encoded%&gt; inside SuffixForNextUrl Property. If you dont use SuffixForNextUrl then raw nextLink or Token will be inserted inside the body. If you dont specify [$pagetoken$] placeholder in the body then NextPage Token will be appended at the end. NextPage Token is extracted by filter expression specified using property NextUrlSuffix"
+                          expressionType="Notify"
+                          name="EnablePageTokenForBody">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this to true if you wish to specify different URL, Header, Body or Filter for first page and next page (i.e. Paginated response). Some APIs like Amazon MWS, NetSuite, Zuora) you may need to set this to true."
+                          expressionType="Notify"
+                          name="HasDifferentNextPageInfo">false</property>
+                        <property
+                          dataType="System.String"
+                          description="When HasDifferentNextPageInfo=true you can set this property to indicate first page and next page. You can specify different URL, Header, Body or Filter for first page and next page (i.e. Paginated response). Use [$tag$] as placeholder anywhere in the URL, Header, Body or Filter and at runtime system will replace it with correct value (first page or next page value). Syntax to specify placeholder for first page vs next page is like a connectionstring url=FirstPageValue|NextPageValue;header=FirstPageValue|NextPageValue;body=FirstPageValue|NextPageValue;filter=FirstPageValue|NextPageValue;method=FirstPageValue|NextPageValue; You can use one or more key/value pairs to make things dynamic (e.g. url, header, body, filter or method)  .For example if you have pagination in your API and First URL is http://abc.com/api/items/get and to get more records you have to call http://abc.com/api/items/getNext then you can use [$tag$] as placeholder in the URL http://abc.com/api/items/[$tag$] and specify this property with first page tag and next page tag as url=get|getNext  (Tags are separated using vertical bar). "
+                          expressionType="Notify"
+                          name="PagePlaceholders"></property>
+                        <property
+                          dataType="System.String"
+                          description="Use this property to set request body fragment for first page. HasDifferentNextPageInfo must be set to true to use this property."
+                          expressionType="Notify"
+                          name="FirstPageBodyPart"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.String"
+                          description="Use this property to set request body fragment for any request after first request. HasDifferentNextPageInfo must be set to true to use this property."
+                          expressionType="Notify"
+                          name="NextPageBodyPart"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.String"
+                          description="Expression to extract Maximum pages to loop through. Some APIs don't stop pagination and keep returning last page data when you try to read data after last page. Specify expression (e.g. $.page_count ) to read total pages to loop through using this property."
+                          expressionType="Notify"
+                          name="PagingMaxPagesExpr"></property>
+                        <property
+                          dataType="System.String"
+                          description="Expression to extract Maximum records to loop through. Some APIs don't stop pagination and keep returning last page data when you try to read data after last page. Specify expression (e.g. $.total_rows ) to read total pages to loop through using this property. This setting is ignored if you set PagingMaxPagesExpr."
+                          expressionType="Notify"
+                          name="PagingMaxRowsExpr"></property>
+                        <property
+                          dataType="System.String"
+                          description="When you enable PagingMaxRowsExpr (end pagination based on MaxRowCount) then you need to count records coming in each response. This expression extract all rows found under specified expression (e.g. $.orders[*] if all records found under orders node)."
+                          expressionType="Notify"
+                          name="PagingMaxRowsDataPathExpr"></property>
+                        <property
+                          dataType="System.String"
+                          description="e.g. Type page_num if URL looks like this =&gt; http://abc.com/?page_num=1&amp;sort=true  (page number via query string)&#xA;--or-- Type &lt;%page%&gt; if page number is inside URL path like this =&gt; http://abc.com/1/?sort=true  (e.g. replace page number in url with placeholder http://abc.com/&lt;%page%&gt;/?sort=true)&#xA;Page number will be incremented by one for next URL until last page is reached or [Max Page Number] is reached. This parameter also controls pagination mode [ByResponseHeaderContinuationToken]. When this mode is used you can enter RESPONSE_HEADER_NAME --OR-- NEXT_QUERY_PARAM=RESPONSE_HEADER_NAME --OR-- NEXT_QUERY_PARAM=RESPONSE_HEADER_NAME(regular_expression). If NEXT_QUERY_PARAM (left side) is omitted then Response Header value is sent to next request in the same Header name. If you like to pass response header value in the next URL then use two parts (e.g. cursor=X-CONTINUE-TOKEN) ... this example will read X-CONTINUE-TOKEN header from response and pass it to next request in the URL like http://myapi.com/?cursor=[value-from-previous-response]. You can also use advanced syntax using Regular expression to extract substring from response header value (e.g. cursor=X-CONTINUE-TOKEN(\d*)) will extract only numeric part from header value. Another example is cursor=X-CONTINUE-TOKEN(^((?!null\b).)*$) ... this will return value if its other than &quot;null&quot; (word). For more information about using regular expression check this link https://zappysys.com/links/?id=10124"
+                          expressionType="Notify"
+                          name="PageNumberAttributeNameInUrl"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Maximum page number until which auto increment is allowed. Type zero for no limit. Next URL contains next page number (increment by one) until last page is detected or [Max Page Number] limit is reached."
+                          expressionType="Notify"
+                          name="MaxPageNumber">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Rules to end pagination. You can use XML markup to include multiple rules. Here is an example of XML with multiple rules. This will stop pagination if any of these rule matches (Status Code, Size, Error Message)  &lt;ArrayOfPagingEndRule&gt;&lt;PagingEndRule&gt;&lt;Mode&gt;DetectBasedOnResponseStatusCode&lt;/Mode&gt;&lt;StatusCode&gt;401&lt;/StatusCode&gt;&lt;/PagingEndRule&gt;&lt;PagingEndRule&gt;&lt;Mode&gt;DetectBasedOnRecordCount&lt;/Mode&gt;&lt;/PagingEndRule&gt;&lt;PagingEndRule&gt;&lt;Mode&gt;DetectBasedOnResponseSize&lt;/Mode&gt;&lt;MinBytes&gt;3&lt;/MinBytes&gt;&lt;MaxBytes&gt;200&lt;/MaxBytes&gt;&lt;/PagingEndRule&gt;&lt;PagingEndRule&gt;&lt;Mode&gt;DetectBasedOnResponseErrorMessage&lt;/Mode&gt;&lt;ErrString&gt;key not found&lt;/ErrString&gt;&lt;/PagingEndRule&gt;&lt;/ArrayOfPagingEndRule&gt;"
+                          expressionType="Notify"
+                          name="PagingEndRules"></property>
+                        <property
+                          dataType="System.String"
+                          description="Variable name which will hold starting page number. This is ignored if you using parameter name from query string to indicate page number."
+                          expressionType="Notify"
+                          name="StartPageNumberVariable"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Page counter increment. By default next page is incremented by one if this value is zero. You can also enter negative number if you want to decrease page counter."
+                          expressionType="Notify"
+                          name="PageNumberIncrement">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specified how you want detect last page."
+                          expressionType="Notify"
+                          name="PagingEndStrategy"
+                          typeConverter="ZappySys.Common.UrlPagingEndDetectionStrategy">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Condition result to compare to detect last page. Set this property to True if you want detect last page if condition is true else set this to False."
+                          expressionType="Notify"
+                          name="LastPageWhenConditionEqualsTo">true</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Minimum bytes expected from response."
+                          expressionType="Notify"
+                          name="ResponseMinBytes">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Maximum bytes from response."
+                          expressionType="Notify"
+                          name="ResponseMaxBytes">3</property>
+                        <property
+                          dataType="System.String"
+                          description="Expected error message sub string from response."
+                          expressionType="Notify"
+                          name="ResponseErrorString">not found</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Expected status code from response when page number you trying to access not found."
+                          expressionType="Notify"
+                          name="ResponseStatusCode">404</property>
+                        <property
+                          dataType="System.String"
+                          description="Enter expression here to filter data.(Example:  $.Users[*].UserName ) This will fetch User names from users records"
+                          expressionType="Notify"
+                          name="Filter"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Use this option to include parent properties (Non array) in the output along with Filtered Rows"
+                          expressionType="Notify"
+                          name="IncludeParentColumns">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="By default child and parent information is not included in the output if children not found for specified expression. For example if you want to extract all orders from all customers nodes then you can type $.Customers[*].Orders[*]. This will fetch all orders from all customers. By default customers records without orders wont be included in the output. If you want to include those customers where orders not found then check this option (Output null information for order attributes). This behavior is similar to LEFT OUTER JOIN in SQL (Left side is parent, right side is child). This option is ***resource intensive*** so only check if you really care about this behavior."
+                          expressionType="Notify"
+                          name="IncludeParentColumnsWhenChildMissing">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this option to true if you want to output parent columns which are array. By default any parent column which is an array is not included in output. See also FilterForParentColumnsWithArrayType property if you set this property"
+                          expressionType="Notify"
+                          name="IncludeParentColumnsWithArrayType">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Filter expression to extract value form parent"
+                          expressionType="Notify"
+                          name="FilterForParentColumnsWithArrayType"></property>
+                        <property
+                          dataType="System.String"
+                          description="Prefix for parent column name. This option is only valid if you have set IncludeParentColumns=True"
+                          expressionType="Notify"
+                          name="ParentColumnPrefix">P_</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Throw error if property name specified in filter expression is missing. By default it will ignore any missing property errors."
+                          expressionType="Notify"
+                          name="ThrowErrorIfPropertyMissing">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="This property how many nested levels should be scanned to fetch various properties. 0=Scan all child levels."
+                          expressionType="Notify"
+                          name="MaxLevelsToScan">0</property>
+                        <property
+                          dataType="System.String"
+                          description="List comma separated property names from JSON document which you want to exclude from output. Specify parent property name to exclude all child nodes."
+                          expressionType="Notify"
+                          name="ExcludedProperties"></property>
+                        <property
+                          dataType="System.String"
+                          description="Property level separator used in generated property name (separator for outer properties - Above selected filter node). Use this if default separator is producing duplicate property name which is conflicting with existing name."
+                          expressionType="Notify"
+                          name="LevelSeparator">_</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enables deep array flattening for selected filtered hierarchy. When you turn on this property it will flatten each property of each array item and expose as column (e.g. If you have Filter set as $.customers[*] and for each customer you have an array of Addresses then you may see output columns like Addresses.1.City, Addresses.1.State, Addresses.2.City, Addresses.2.State .... Addresses.N.City, Addresses.N.State). You can control how many array items you want to flatten by setting MaxArrayItemsToFlatten property."
+                          expressionType="Notify"
+                          name="EnableArrayFlattening">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Maximum number of array items to flatten. inner array flattening. Adjust this property to control how many columns being generated. This option is ignored if you set EnableArrayFlattening=false"
+                          expressionType="Notify"
+                          name="MaxArrayItemsToFlatten">10</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Compression format for source file (e.g. gzip, zip)"
+                          expressionType="Notify"
+                          name="FileCompressionType"
+                          typeConverter="ZappySys.Common.FileCompressionType">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Array Transformation you want to apply. Useful for case when you have 2-Dimensional arrays with rows/columns in separate arrays."
+                          expressionType="Notify"
+                          name="ArrayTransformationType"
+                          typeConverter="ZappySys.Json.ArrayTransformType">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Filter expression to use to extract column names for array transformation."
+                          expressionType="Notify"
+                          name="ArrayTransColumnNameFilter"></property>
+                        <property
+                          dataType="System.String"
+                          description="Filter expression for row values (Not applicable for simple array transformation)."
+                          expressionType="Notify"
+                          name="ArrayTransRowValueFilter"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When you have 2D array but don't have column list specified in a separate array then use this option (e.g. { arr: [[10,11],[21,22]] } ). If you selected Column less array or JSON Lines option then this property means Column Names coming from First Line of array."
+                          expressionType="Notify"
+                          name="ArrayTransEnableCustomColumns">false</property>
+                        <property
+                          dataType="System.String"
+                          description="When you have 2D array but don't have column list specified in a separate array then use specify column names here. Use comma separated list (e.g col1,col2,col3 ). Column name Order must match value order."
+                          expressionType="Notify"
+                          name="ArrayTransCustomColumns"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enable Raw Document Output Mode with unstructured data processing option for any format (i.e. XML, Html, Text, Json). Unlike other option EnableRawOutputMode, this option doesn't invoke parser to extract documents by finding row terminator. It will source string as row value in single row/ single column. You can also define RawOutputDataTemplate along with this property (e.g. Template can be {data: [$1] } ). This will wrap response inside template string before sending to parser."
+                          expressionType="Notify"
+                          name="EnableRawOutputModeSingleRow">false</property>
+                        <property
+                          dataType="System.String"
+                          description="When you enable EnableRawOutputModeSingleRow you can use this property. Template must be in JSON format (e.g. { data: [$1] } ). [$1] means content extracted using first expression or no expression (i.e. raw data). If RawOutputFilterExpr contains multiple expressions (separated by || ) then you can use multiple placeholders (i.e. [$1], [$2]...[$N]). RawOutputFilterExpr can have JsonPath, XmlPath, RegEx (set RawOutputExtractMode)."
+                          expressionType="Notify"
+                          name="RawOutputDataRowTemplate"></property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies how custom date formatted strings are parsed when reading JSON."
+                          expressionType="Notify"
+                          name="DateFormatString"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies how date formatted strings, e.g. Date(1198908717056) and 2012-03-21T05:40Z, are parsed when reading JSON."
+                          expressionType="Notify"
+                          name="DateParseHandling"
+                          typeConverter="ZappySys.Common.DateParseHandling">1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies how decimal values are parsed when reading JSON. Change this setting to Decimal if you like to have large precision / scale."
+                          expressionType="Notify"
+                          name="FloatParseHandling"
+                          typeConverter="ZappySys.Common.FloatParseHandling">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indent JSON output so its easy to read."
+                          expressionType="Notify"
+                          name="IndentOutput">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Output as raw JSON document rather than parsing individual fields. This option is helpful if you have documents stored in a file and you want to pass them downstream as raw JSON string rather than parsing into columns."
+                          expressionType="Notify"
+                          name="OutputRawDocument">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When you redirect error to error output by default you get additional information in ErrorMessage column. Check this option if you need exact Response Body (Useful if its in JSON/XML format which needs to be parsed for additional information for later step)."
+                          expressionType="Notify"
+                          name="OnErrorOutputResponseBody">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this option to true if you want to output FilePath. This option is ignored when you consume DirectValue or data from Url rather than local files. Output column name will be __FilePath"
+                          expressionType="Notify"
+                          name="OutputFilePath">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this option to true if you want to output FileName. This option is ignored when you consume DirectValue or data from Url rather than local files. Output column name will be __FileName"
+                          expressionType="Notify"
+                          name="OutputFileName">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Set this option to true if you want to move processed file to archive folder."
+                          expressionType="Notify"
+                          name="EnableArchiveFile">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Folder path where you want to move processed file."
+                          expressionType="Notify"
+                          name="ArchiveFolderPath"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Folder path where you want to move processed file."
+                          expressionType="Notify"
+                          name="OverwriteFileInArchiveFolder">false</property>
+                        <property
+                          dataType="System.String"
+                          description="File naming convention for archived file. By default it will use same name as original source file processed. But you can control naming format using {%name%} and {%ext%} placeholders. Examples: {%name%}_{%timestamp%}_processed{%ext%} or {%name%}{%ext%}.{{System::ContainerStartTime,yyyyMMdd_HHmmss_fff}}"
+                          expressionType="Notify"
+                          name="ArchiveFileNamingConvention"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When this property is true then Column is converted to Row. Pivoted names will appear under  Pivot_Name column and values will appear under Pivot_Value field."
+                          expressionType="Notify"
+                          name="EnablePivot">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When this property is true then one extra column Pivot_Path appears in the output along with Pivot_Name and Pivot_Value. This option is really useful to see parent hierarchy for pivoted value."
+                          expressionType="Notify"
+                          name="IncludePivotPath">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Enables custom search/replace function on Pivot_Path before final value appears in the output. This option is only valid when IncludePivotPath=true."
+                          expressionType="Notify"
+                          name="EnablePivotPathSearchReplace">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Search string (static string or regex pattern) for search/replace operation on Pivot_Path. You can use --regex suffix to treat search string as Regular Expression (e.g. MyData-(\d+)--regex ). To invoke case in-sensitive regex search use --regex. This option is only valid when EnablePivotPathSearchReplace=true."
+                          expressionType="Notify"
+                          name="PivotPathSearchFor"></property>
+                        <property
+                          dataType="System.String"
+                          description="Replacement string for search/replace operation on Pivot_Path. If you used --regex suffix in PivotPathSearchFor then you can use placeholders like $0, $1, $2... anywhere in this string (e.g. To remove first part of email id and just keep domain part you can do this way. Set PivotPathSearchFor=(\w+)@(\w+.com)--regex, and set current property i.e. PivotPathReplaceWith=***@$2 ). This option is only valid when EnablePivotPathSearchReplace=true."
+                          expressionType="Notify"
+                          name="PivotPathReplaceWith"></property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When this option is checked, system allows to parse large number (Higher than Int64) in JSON document (i.e. { id: 76000009353950433247780 } ). If you do not turn on this option then it may throw error if large number is encountered. This option is SLOW because it has to perform additional checks in order to avoid Large number overflow error so do not turn on unless you getting Large number error."
+                          expressionType="Notify"
+                          name="EnableBigNumberHandling">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Metadata scan mode controls how data type and length is determined. By default few records scanned to determine datatype/length. Changing ScanMode affects length/datatype accuracy."
+                          expressionType="Notify"
+                          name="MetaDataScanMode"
+                          typeConverter="ZappySys.Common.Data.MetaDataScanMode">4</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Length for all string column. This option is only valid for MetaDataScanMode=Custom"
+                          expressionType="Notify"
+                          name="MetaDataCustomLength">1000</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="When this option is true, it detects all string values as DT_STR (Ascii) rather than DT_WSTR (Unicode)"
+                          expressionType="Notify"
+                          name="MetaDataTreatStringAsAscii">false</property>
+                        <property
+                          dataType="System.String"
+                          name="UserComponentTypeName">ZappySys.JsonSource</property>
+                      </properties>
+                      <outputs>
+                        <output
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput]"
+                          errorOrTruncationOperation="Error"
+                          errorRowDisposition="FailComponent"
+                          name="JsonSourceOutput"
+                          truncationRowDisposition="FailComponent">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Id]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[id]"
+                              length="46"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Id]"
+                              name="Id" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Name]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[name]"
+                              length="76"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Name]"
+                              name="Name" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[BreweryType]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[brewery_type]"
+                              length="20"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[BreweryType]"
+                              name="BreweryType" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Address1]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[address_1]"
+                              length="73"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Address1]"
+                              name="Address1" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Address2]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[address_2]"
+                              length="73"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Address2]"
+                              name="Address2" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Address3]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[address_3]"
+                              length="73"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Address3]"
+                              name="Address3" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[City]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[city]"
+                              length="36"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[City]"
+                              name="City" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[StateProvince]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[state_province]"
+                              length="30"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[StateProvince]"
+                              name="StateProvince" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[PostalCode]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[postal_code]"
+                              length="20"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[PostalCode]"
+                              name="PostalCode" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Country]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[country]"
+                              length="24"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Country]"
+                              name="Country" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Longitude]"
+                              dataType="r4"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[longitude]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Longitude]"
+                              name="Longitude" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Latitude]"
+                              dataType="r4"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[latitude]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Latitude]"
+                              name="Latitude" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Phone]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[phone]"
+                              length="20"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Phone]"
+                              name="Phone" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[WebsiteUrl]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[website_url]"
+                              length="111"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[WebsiteUrl]"
+                              name="WebsiteUrl" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[State]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[state]"
+                              length="30"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[State]"
+                              name="State" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Street]"
+                              codePage="1252"
+                              dataType="str"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[street]"
+                              length="73"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Street]"
+                              name="Street" />
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[id]"
+                              dataType="wstr"
+                              length="144"
+                              name="id" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[name]"
+                              dataType="wstr"
+                              length="180"
+                              name="name" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[brewery_type]"
+                              dataType="wstr"
+                              length="40"
+                              name="brewery_type" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[address_1]"
+                              dataType="wstr"
+                              length="120"
+                              name="address_1" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[address_2]"
+                              dataType="wstr"
+                              length="80"
+                              name="address_2" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[address_3]"
+                              dataType="wstr"
+                              length="1020"
+                              name="address_3" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[city]"
+                              dataType="wstr"
+                              length="64"
+                              name="city" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[state_province]"
+                              dataType="wstr"
+                              length="56"
+                              name="state_province" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[postal_code]"
+                              dataType="wstr"
+                              length="40"
+                              name="postal_code" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[country]"
+                              dataType="wstr"
+                              length="52"
+                              name="country" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[longitude]"
+                              dataType="r8"
+                              name="longitude" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[latitude]"
+                              dataType="r8"
+                              name="latitude" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[phone]"
+                              dataType="wstr"
+                              length="80"
+                              name="phone" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[website_url]"
+                              dataType="wstr"
+                              length="136"
+                              name="website_url" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[state]"
+                              dataType="wstr"
+                              length="56"
+                              name="state" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[street]"
+                              dataType="wstr"
+                              length="120"
+                              name="street" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].ExternalColumns[__FileName]"
+                              dataType="wstr"
+                              length="600"
+                              name="__FileName" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output]"
+                          isErrorOut="true"
+                          name="JsonSource Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Id]"
+                              codePage="1252"
+                              dataType="str"
+                              length="46"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Id]"
+                              name="Id" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Name]"
+                              codePage="1252"
+                              dataType="str"
+                              length="76"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Name]"
+                              name="Name" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[BreweryType]"
+                              codePage="1252"
+                              dataType="str"
+                              length="20"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[BreweryType]"
+                              name="BreweryType" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Address1]"
+                              codePage="1252"
+                              dataType="str"
+                              length="73"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Address1]"
+                              name="Address1" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Address2]"
+                              codePage="1252"
+                              dataType="str"
+                              length="73"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Address2]"
+                              name="Address2" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Address3]"
+                              codePage="1252"
+                              dataType="str"
+                              length="73"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Address3]"
+                              name="Address3" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[City]"
+                              codePage="1252"
+                              dataType="str"
+                              length="36"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[City]"
+                              name="City" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[StateProvince]"
+                              codePage="1252"
+                              dataType="str"
+                              length="30"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[StateProvince]"
+                              name="StateProvince" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[PostalCode]"
+                              codePage="1252"
+                              dataType="str"
+                              length="20"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[PostalCode]"
+                              name="PostalCode" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Country]"
+                              codePage="1252"
+                              dataType="str"
+                              length="24"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Country]"
+                              name="Country" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Longitude]"
+                              dataType="r4"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Longitude]"
+                              name="Longitude" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Latitude]"
+                              dataType="r4"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Latitude]"
+                              name="Latitude" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Phone]"
+                              codePage="1252"
+                              dataType="str"
+                              length="20"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Phone]"
+                              name="Phone" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[WebsiteUrl]"
+                              codePage="1252"
+                              dataType="str"
+                              length="111"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[WebsiteUrl]"
+                              name="WebsiteUrl" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[State]"
+                              codePage="1252"
+                              dataType="str"
+                              length="30"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[State]"
+                              name="State" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Street]"
+                              codePage="1252"
+                              dataType="str"
+                              length="73"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[Street]"
+                              name="Street" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorColumnName]"
+                              codePage="1252"
+                              dataType="str"
+                              length="128"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorColumnName]"
+                              name="ErrorColumnName" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorMessage]"
+                              dataType="wstr"
+                              length="4000"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSource Error Output].Columns[ErrorMessage]"
+                              name="ErrorMessage" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria"
+                      componentClassID="Microsoft.OLEDBDestination"
+                      contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+                      description="Destino OLE DB"
+                      name="MetadadosCervejaria"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                          name="OpenRowset">[extr].[MetadadosCervejaria]</property>
+                        <property
+                          dataType="System.String"
+                          description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="O comando SQL a ser executado."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica o modo usado para acessar o banco de dados."
+                          name="AccessMode"
+                          typeConverter="AccessMode">0</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                          name="FastLoadOptions"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[LocalHost]"
+                          connectionManagerRefId="Package.ConnectionManagers[LocalHost]"
+                          description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB]"
+                          errorOrTruncationOperation="Inserir"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="Entrada de Destino OLE DB">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Id]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="46"
+                              cachedName="Id"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Id]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Id]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Name]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="76"
+                              cachedName="Name"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Name]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Name]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[BreweryType]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="20"
+                              cachedName="BreweryType"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[BreweryType]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[BreweryType]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Address1]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="73"
+                              cachedName="Address1"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Address1]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Address1]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Address2]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="73"
+                              cachedName="Address2"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Address2]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Address2]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Address3]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="73"
+                              cachedName="Address3"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Address3]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Address3]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[City]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="36"
+                              cachedName="City"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[City]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[City]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[StateProvince]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="30"
+                              cachedName="StateProvince"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[StateProvince]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[StateProvince]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[PostalCode]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="20"
+                              cachedName="PostalCode"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[PostalCode]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[PostalCode]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Country]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="24"
+                              cachedName="Country"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Country]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Country]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Longitude]"
+                              cachedDataType="r4"
+                              cachedName="Longitude"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Longitude]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Longitude]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Latitude]"
+                              cachedDataType="r4"
+                              cachedName="Latitude"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Latitude]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Latitude]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Phone]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="20"
+                              cachedName="Phone"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Phone]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Phone]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[WebsiteUrl]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="111"
+                              cachedName="WebsiteUrl"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[WebsiteUrl]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[WebsiteUrl]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[State]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="30"
+                              cachedName="State"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[State]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[State]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Street]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="73"
+                              cachedName="Street"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Street]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput].Columns[Street]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[EndPoint]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="73"
+                              cachedName="EndPoint"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[EndPoint]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada].Columns[EndPoint]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Page]"
+                              cachedDataType="i4"
+                              cachedName="Page"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Page]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada].Columns[Page]" />
+                            <inputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Size]"
+                              cachedDataType="i4"
+                              cachedName="Size"
+                              externalMetadataColumnId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Size]"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada].Columns[Size]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Id]"
+                              codePage="1252"
+                              dataType="str"
+                              length="144"
+                              name="Id" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Name]"
+                              codePage="1252"
+                              dataType="str"
+                              length="180"
+                              name="Name" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[BreweryType]"
+                              codePage="1252"
+                              dataType="str"
+                              length="40"
+                              name="BreweryType" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Address1]"
+                              codePage="1252"
+                              dataType="str"
+                              length="120"
+                              name="Address1" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Address2]"
+                              codePage="1252"
+                              dataType="str"
+                              length="80"
+                              name="Address2" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Address3]"
+                              codePage="1252"
+                              dataType="str"
+                              length="1020"
+                              name="Address3" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[City]"
+                              codePage="1252"
+                              dataType="str"
+                              length="64"
+                              name="City" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[StateProvince]"
+                              codePage="1252"
+                              dataType="str"
+                              length="56"
+                              name="StateProvince" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[PostalCode]"
+                              codePage="1252"
+                              dataType="str"
+                              length="40"
+                              name="PostalCode" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Country]"
+                              codePage="1252"
+                              dataType="str"
+                              length="52"
+                              name="Country" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Longitude]"
+                              dataType="r4"
+                              name="Longitude" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Latitude]"
+                              dataType="r4"
+                              name="Latitude" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Phone]"
+                              codePage="1252"
+                              dataType="str"
+                              length="80"
+                              name="Phone" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[WebsiteUrl]"
+                              codePage="1252"
+                              dataType="str"
+                              length="136"
+                              name="WebsiteUrl" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[State]"
+                              codePage="1252"
+                              dataType="str"
+                              length="56"
+                              name="State" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Street]"
+                              codePage="1252"
+                              dataType="str"
+                              length="120"
+                              name="Street" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[EndPoint]"
+                              codePage="1252"
+                              dataType="str"
+                              length="150"
+                              name="EndPoint" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Page]"
+                              dataType="i4"
+                              name="Page" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Size]"
+                              dataType="i4"
+                              name="Size" />
+                            <externalMetadataColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[DataInsercao]"
+                              dataType="dbTimeStamp"
+                              name="DataInsercao" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Destino OLE DB]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Saída de Erro de Destino OLE DB"
+                          synchronousInputId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\TaskExtract\Loop For\MetadadosCervejaria.Paths[JsonSourceOutput]"
+                      endId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Inputs[Entrada de Coluna Derivada]"
+                      name="JsonSourceOutput"
+                      startId="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File).Outputs[JsonSourceOutput]" />
+                    <path
+                      refId="Package\TaskExtract\Loop For\MetadadosCervejaria.Paths[Saída de Coluna Derivada]"
+                      endId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Inputs[Entrada de Pesquisa]"
+                      name="Saída de Coluna Derivada"
+                      startId="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada.Outputs[Saída de Coluna Derivada]" />
+                    <path
+                      refId="Package\TaskExtract\Loop For\MetadadosCervejaria.Paths[Saída Sem Correspondência de Pesquisa]"
+                      endId="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria.Inputs[Entrada de Destino OLE DB]"
+                      name="Saída Sem Correspondência de Pesquisa"
+                      startId="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia.Outputs[Saída Sem Correspondência de Pesquisa]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\TaskExtract\Pega Ultima Page"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarefa Executar SQL"
+          DTS:DTSID="{8193A809-04FC-46F2-ACA6-3E16E32970D6}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Pega Ultima Page"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{0D7E8E3B-174C-4CFB-8A4D-D4B1AFAA3C57}"
+              SQLTask:SqlStatementSource="declare @acrescimo int = 10&#xA;declare @default int = 170&#xA;&#xA;SELECT     &#xA;&#x9;  (isnull(max(page),@default))+@acrescimo as Var_max_page&#xA;&#xA;FROM [extr].[MetadadosCervejaria] with(nolock)"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="Var_max_page"
+                SQLTask:DtsVariableName="User::Var_max_page" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\TaskExtract.PrecedenceConstraints[Restrição]"
+          DTS:CreationName=""
+          DTS:DTSID="{A7000314-9423-46D2-8075-B29CEBA82450}"
+          DTS:From="Package\TaskExtract\Pega Ultima Page"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restrição"
+          DTS:To="Package\TaskExtract\Loop For" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="184,42"
+          Id="Package\TaskExtract\Loop For\MetadadosCervejaria"
+          TopLeft="34,29" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="262,112"
+          Size="262,155"
+          Id="Package\TaskExtract\Loop For"
+          TopLeft="28,108" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\TaskExtract\Pega Ultima Page"
+          TopLeft="72,16" />
+        <EdgeLayout
+          Id="Package\TaskExtract.PrecedenceConstraints[Restrição]"
+          TopLeft="157.5,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="323,353"
+          Size="323,396"
+          Id="Package\TaskExtract"
+          TopLeft="25,27" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\TaskExtract\Loop For\MetadadosCervejaria">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="240,42"
+          Id="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File)"
+          TopLeft="28,27" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada"
+          TopLeft="71,106" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia"
+          TopLeft="71,183" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria"
+          TopLeft="67,283" />
+        <EdgeLayout
+          Id="Package\TaskExtract\Loop For\MetadadosCervejaria.Paths[Saída Sem Correspondência de Pesquisa]"
+          TopLeft="156,225">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-89.5940234375,19.15234375,179.188046875,12.1953125"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\TaskExtract\Loop For\MetadadosCervejaria.Paths[Saída de Coluna Derivada]"
+          TopLeft="152.25,148">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35"
+              Start="0,0"
+              End="0,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\TaskExtract\Loop For\MetadadosCervejaria.Paths[JsonSourceOutput]"
+          TopLeft="149.75,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
