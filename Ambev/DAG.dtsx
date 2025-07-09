@@ -11,10 +11,52 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="DAG"
   DTS:PackageType="5"
-  DTS:VersionBuild="4"
-  DTS:VersionGUID="{C43153F1-1D90-4988-95EB-B7CED5ADC331}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{D2DCDD32-0F1C-4360-AD23-FB7812CA9031}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TaskDeleteHistory.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{31FDA38D-F50E-4250-B1E7-08B74D33AA4E}"
+      DTS:ObjectName="TaskDeleteHistory.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\rodri\Desktop\Case\SSIS\Ambev\Ambev\TaskDeleteHistory.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TaskExtract.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{BCA32DD3-B919-4F41-B052-173CCC98B614}"
+      DTS:ObjectName="TaskExtract.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\rodri\Desktop\Case\SSIS\Ambev\Ambev\TaskExtract.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TaskRlt.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{253F7305-FA02-4F9F-8F8A-5ABE7A4D98B6}"
+      DTS:ObjectName="TaskRlt.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\rodri\Desktop\Case\SSIS\Ambev\Ambev\TaskRlt.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[TaskTransf.dtsx]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{16D75F0B-0310-42F8-851D-A97CFD3D6351}"
+      DTS:ObjectName="TaskTransf.dtsx">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Users\rodri\Desktop\Case\SSIS\Ambev\Ambev\TaskTransf.dtsx" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -39,8 +81,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>TaskExtract.dtsx</PackageName>
+              <Connection>{BCA32DD3-B919-4F41-B052-173CCC98B614}</Connection>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -56,8 +97,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>TaskRlt.dtsx</PackageName>
+              <Connection>{253F7305-FA02-4F9F-8F8A-5ABE7A4D98B6}</Connection>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -73,8 +113,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>TaskTransf.dtsx</PackageName>
+              <Connection>{16D75F0B-0310-42F8-851D-A97CFD3D6351}</Connection>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -120,8 +159,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>TaskDeleteHistory.dtsx</PackageName>
+              <Connection>{31FDA38D-F50E-4250-B1E7-08B74D33AA4E}</Connection>
             </ExecutePackageTask>
           </DTS:ObjectData>
         </DTS:Executable>
@@ -155,6 +193,14 @@
           Size="137,42"
           Id="Package\DAG\TaskExtract"
           TopLeft="5.50000000000001,5.5" />
+        <NodeLayout
+          Size="116,42"
+          Id="Package\DAG\TaskRlt"
+          TopLeft="16,209.5" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\DAG\TaskTransf"
+          TopLeft="7.00000000000003,107.5" />
         <EdgeLayout
           Id="Package\DAG.PrecedenceConstraints[Restrição]"
           TopLeft="74,47.5">
@@ -177,10 +223,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="134,42"
-          Id="Package\DAG\TaskTransf"
-          TopLeft="7.00000000000003,107.5" />
         <EdgeLayout
           Id="Package\DAG.PrecedenceConstraints[Restrição 1]"
           TopLeft="74,149.5">
@@ -203,14 +245,10 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="116,42"
-          Id="Package\DAG\TaskRlt"
-          TopLeft="16,209.5" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="150,306"
+          PanelSize="150,307"
           Size="148,350"
           Id="Package\DAG"
           TopLeft="12,14" />
@@ -221,7 +259,7 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="180,102"
+          PanelSize="180,103"
           Size="180,146"
           Id="Package\DeleteHistory"
           TopLeft="195,14" />
