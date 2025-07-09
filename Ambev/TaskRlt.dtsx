@@ -1,0 +1,996 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/8/2025 9:09:08 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-4A6UT0U9"
+  DTS:CreatorName="LAPTOP-4A6UT0U9\rodri"
+  DTS:DTSID="{3EF2CFCF-D1EB-404C-A420-D7598DD6BCE1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1046"
+  DTS:ObjectName="TaskRlt"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{D41DFE62-4A3F-4E73-B985-48B2AC1BE90D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{46A49996-DBB9-4D20-8F48-F4AE4406F9F5}"
+      DTS:ObjectName="LocalHost">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=LAPTOP-4A6UT0U9\SQLEXPRESS;Initial Catalog=DadosAmbev;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-TaskRlt-{46A49996-DBB9-4D20-8F48-F4AE4406F9F5}LAPTOP-4A6UT0U9\SQLEXPRESS.DadosAmbev;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Falha"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarefa Executar SQL"
+      DTS:DTSID="{0aaef4bf-550d-46c6-bc6e-abf47edb7c65}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Falha"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{46A49996-DBB9-4D20-8F48-F4AE4406F9F5}"
+          SQLTask:SqlStatementSource="--Falha&#xA;insert into dim.LogStatus&#xA;&#xA;select &#xA;       'rlt'&#xA;   ,'AgregadoCervejaria'&#xA;   ,'Falha'&#xA;   ,getdate()" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Sucesso"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarefa Executar SQL"
+      DTS:DTSID="{7ad2708b-f6fa-443f-bbc5-998707e9ea60}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sucesso"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{46A49996-DBB9-4D20-8F48-F4AE4406F9F5}"
+          SQLTask:SqlStatementSource="--Sucesso&#xA;insert into dim.LogStatus&#xA;&#xA;select &#xA;       'rlt'&#xA;   ,'AgregadoCervejaria'&#xA;   ,'Sucesso'&#xA;   ,getdate()" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\TaskRlt"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Contêiner da Sequência"
+      DTS:DTSID="{0077426B-CC7C-42D1-8451-A231FFFDEFB7}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="TaskRlt">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\TaskRlt\rlt - AgregadoCervejaria"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tarefa Fluxo de Dados"
+          DTS:DTSID="{95A73808-FECF-4D39-9247-F2CFFC8FFFEF}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="rlt - AgregadoCervejaria"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação"
+                  componentClassID="Microsoft.Aggregate"
+                  contactInfo="Agregação;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;3"
+                  description="Dados de agregações com funções como Average, Sum, Count, Max e Min. Por exemplo, agrupe dados para computar a soma das vendas por produto ou a média de visitas por dia."
+                  name="Agregação"
+                  version="3">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica o número aproximado de chaves de agrupar por produzidas pela agregação. Um número Baixo indica valores de 500.000 chaves. Médio indica 5 valores de 5 milhões de chaves e Alto indica mais de 25 milhões de valores de chaves. Não especificado indica que nenhum valor de KeyScale foi usado."
+                      name="KeyScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Especifica o número exato de chaves de agrupar por produzidas pela agregação. Se um valor de KeyScale for especificado, o valor em Keys terá precedência."
+                      name="Keys" />
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica o número aproximado de valores distintos em uma coluna que a agregação conta de modo distinto. Baixo indica 500.000 valores de chave, Médio indica 5 milhões de valores de chave e Alto indica mais de 25 milhões de valores de chave. Não especificado indica que nenhum valor de CountDistinctScale foi usado."
+                      name="CountDistinctScale"
+                      typeConverter="KeyScaleType">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="Especifica o número exato de valores distintos de uma coluna que a agregação conta de modo distinto. Se um valor de CountDistinctScale for especificado, o valor em CountDistinctKeys terá precedência."
+                      name="CountDistinctKeys" />
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a porcentagem pela qual a memória pode ser estendida durante a agregação. Os valores válidos ficam entre 1 e 100."
+                      name="AutoExtendFactor">25</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Inputs[Entrada de Agregação 1]"
+                      name="Entrada de Agregação 1">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Inputs[Entrada de Agregação 1].Columns[BreweryType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="BreweryType"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[BreweryType]" />
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Inputs[Entrada de Agregação 1].Columns[City]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="36"
+                          cachedName="City"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[City]" />
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Inputs[Entrada de Agregação 1].Columns[StateProvince]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="StateProvince"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[StateProvince]" />
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Inputs[Entrada de Agregação 1].Columns[Country]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="24"
+                          cachedName="Country"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[Country]" />
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Inputs[Entrada de Agregação 1].Columns[State]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="State"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[State]" />
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Inputs[Entrada de Agregação 1].Columns[QtdCervejaria]"
+                          cachedDataType="i4"
+                          cachedName="QtdCervejaria"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[QtdCervejaria]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1]"
+                      name="Saída de Agregação 1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica o número aproximado de chaves de agrupar por produzidas pela agregação. Um número Baixo indica valores de 500.000 chaves. Médio indica 5 valores de 5 milhões de chaves e Alto indica mais de 25 milhões de valores de chaves. Não especificado indica que nenhum valor de KeyScale foi usado."
+                          name="KeyScale"
+                          typeConverter="KeyScaleType">0</property>
+                        <property
+                          dataType="System.Null"
+                          description="Especifica o número exato de chaves de agrupar por produzidas pela agregação. Se um valor de KeyScale for especificado, o valor em Keys terá precedência."
+                          name="Keys" />
+                      </properties>
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[BreweryType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[BreweryType]"
+                          name="BreweryType">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Especifica a identificação da coluna de entrada usada na agregação."
+                              name="AggregationColumnId">#{Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[BreweryType]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica o tipo de agregação."
+                              name="AggregationType"
+                              typeConverter="AggregationType">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Indica se a coluna requer tratamento especial porque pode conter dados superdimensionados ou exigir precisão superior a de um tipo de dados flutuante."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica as opções de comparação da cadeia de caracteres."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[City]"
+                          name="City">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Especifica a identificação da coluna de entrada usada na agregação."
+                              name="AggregationColumnId">#{Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[City]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica o tipo de agregação."
+                              name="AggregationType"
+                              typeConverter="AggregationType">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Indica se a coluna requer tratamento especial porque pode conter dados superdimensionados ou exigir precisão superior a de um tipo de dados flutuante."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica as opções de comparação da cadeia de caracteres."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[StateProvince]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[StateProvince]"
+                          name="StateProvince">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Especifica a identificação da coluna de entrada usada na agregação."
+                              name="AggregationColumnId">#{Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[StateProvince]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica o tipo de agregação."
+                              name="AggregationType"
+                              typeConverter="AggregationType">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Indica se a coluna requer tratamento especial porque pode conter dados superdimensionados ou exigir precisão superior a de um tipo de dados flutuante."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica as opções de comparação da cadeia de caracteres."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[Country]"
+                          codePage="1252"
+                          dataType="str"
+                          length="24"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[Country]"
+                          name="Country">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Especifica a identificação da coluna de entrada usada na agregação."
+                              name="AggregationColumnId">#{Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[Country]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica o tipo de agregação."
+                              name="AggregationType"
+                              typeConverter="AggregationType">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Indica se a coluna requer tratamento especial porque pode conter dados superdimensionados ou exigir precisão superior a de um tipo de dados flutuante."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica as opções de comparação da cadeia de caracteres."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[State]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[State]"
+                          name="State">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Especifica a identificação da coluna de entrada usada na agregação."
+                              name="AggregationColumnId">#{Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[State]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica o tipo de agregação."
+                              name="AggregationType"
+                              typeConverter="AggregationType">0</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Indica se a coluna requer tratamento especial porque pode conter dados superdimensionados ou exigir precisão superior a de um tipo de dados flutuante."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica as opções de comparação da cadeia de caracteres."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[QtdCervejaria]"
+                          dataType="i8"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[QtdCervejaria]"
+                          name="QtdCervejaria">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Especifica a identificação da coluna de entrada usada na agregação."
+                              name="AggregationColumnId">#{Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[QtdCervejaria]}</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica o tipo de agregação."
+                              name="AggregationType"
+                              typeConverter="AggregationType">4</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Indica se a coluna requer tratamento especial porque pode conter dados superdimensionados ou exigir precisão superior a de um tipo de dados flutuante."
+                              name="IsBig">1</property>
+                            <property
+                              dataType="System.Int32"
+                              description="Especifica as opções de comparação da cadeia de caracteres."
+                              name="AggregationComparisonFlags">0</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Origem OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;7"
+                  description="Origem OLE DB"
+                  name="MetadadosCervejaria"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="O comando SQL a ser executado."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+       [BreweryType]
+      ,[City]
+      ,[StateProvince]
+      ,[Country]
+      ,[State]
+      ,[QtdCervejaria]
+
+FROM [transf].[MetadadosCervejaria] with(nolock)</property>
+                    <property
+                      dataType="System.String"
+                      description="A variável que contém o comando SQL a ser executado."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica o modo usado para acessar o banco de dados."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[LocalHost]"
+                      connectionManagerRefId="Package.ConnectionManagers[LocalHost]"
+                      description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB]"
+                      name="Saída de Origem OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[BreweryType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[BreweryType]"
+                          length="20"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[BreweryType]"
+                          name="BreweryType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[City]"
+                          length="36"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[City]"
+                          name="City"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[StateProvince]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[StateProvince]"
+                          length="30"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[StateProvince]"
+                          name="StateProvince"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[Country]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[Country]"
+                          length="24"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[Country]"
+                          name="Country"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[State]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[State]"
+                          length="30"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[State]"
+                          name="State"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[QtdCervejaria]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversão"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[QtdCervejaria]"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].Columns[QtdCervejaria]"
+                          name="QtdCervejaria"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[BreweryType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="BreweryType" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[StateProvince]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="StateProvince" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[Country]"
+                          codePage="1252"
+                          dataType="str"
+                          length="24"
+                          name="Country" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[State]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="State" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB].ExternalColumns[QtdCervejaria]"
+                          dataType="i4"
+                          name="QtdCervejaria" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB]"
+                      isErrorOut="true"
+                      name="Saída de Erro de Origem OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[BreweryType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[BreweryType]"
+                          name="BreweryType" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[City]"
+                          name="City" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[StateProvince]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[StateProvince]"
+                          name="StateProvince" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[Country]"
+                          codePage="1252"
+                          dataType="str"
+                          length="24"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[Country]"
+                          name="Country" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[State]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[State]"
+                          name="State" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[QtdCervejaria]"
+                          dataType="i4"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[QtdCervejaria]"
+                          name="QtdCervejaria" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Erro de Origem OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+                  description="Destino OLE DB"
+                  name="rlt - AgregadoCervejaria"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowset">[rlt].[AgregadoCervejaria]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="O comando SQL a ser executado."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica o modo usado para acessar o banco de dados."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[LocalHost]"
+                      connectionManagerRefId="Package.ConnectionManagers[LocalHost]"
+                      description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB]"
+                      errorOrTruncationOperation="Inserir"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de Destino OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].Columns[BreweryType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="BreweryType"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[BreweryType]"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[BreweryType]" />
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].Columns[City]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="36"
+                          cachedName="City"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[City]"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[City]" />
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].Columns[StateProvince]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="StateProvince"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[StateProvince]"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[StateProvince]" />
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].Columns[Country]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="24"
+                          cachedName="Country"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Country]"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[Country]" />
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].Columns[State]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="State"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[State]"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[State]" />
+                        <inputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].Columns[QtdCervejaria]"
+                          cachedDataType="i8"
+                          cachedName="QtdCervejaria"
+                          externalMetadataColumnId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[QtdCervejaria]"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1].Columns[QtdCervejaria]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[BreweryType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="BreweryType" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[City]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[StateProvince]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="StateProvince" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Country]"
+                          codePage="1252"
+                          dataType="str"
+                          length="24"
+                          name="Country" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[State]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="State" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[QtdCervejaria]"
+                          dataType="i4"
+                          name="QtdCervejaria" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[DataInsercao]"
+                          dataType="dbTimeStamp"
+                          name="DataInsercao" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Outputs[Saída de Erro de Destino OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Saída de Erro de Destino OLE DB"
+                      synchronousInputId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Saída de Agregação 1]"
+                  endId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB]"
+                  name="Saída de Agregação 1"
+                  startId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Outputs[Saída de Agregação 1]" />
+                <path
+                  refId="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Saída de Origem OLE DB]"
+                  endId="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação.Inputs[Entrada de Agregação 1]"
+                  name="Saída de Origem OLE DB"
+                  startId="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria.Outputs[Saída de Origem OLE DB]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restrição]"
+      DTS:CreationName=""
+      DTS:DTSID="{D97A4786-7DFC-482D-90CE-2E71A5A16F81}"
+      DTS:From="Package\TaskRlt"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restrição"
+      DTS:To="Package\Sucesso" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restrição 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{F3CDA51F-8AF5-43DC-94B8-5B0D06C5C0C2}"
+      DTS:From="Package\TaskRlt"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restrição 1"
+      DTS:To="Package\Falha"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
+<!--Se você editar manualmente esta seção e cometer algum erro, poderá excluí-la. -->
+<!--O pacote ainda poderá ser carregado normalmente, mas as informações de layout anteriores serão perdidas e o designer reorganizará automaticamente os elementos na superfície de design.-->
+<Objects
+  Version="8">
+  <!--Cada nó abaixo conterá propriedades que não afetam o comportamento em tempo de execução.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="196,42"
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="207,102"
+          Size="207,146"
+          Id="Package\TaskRlt"
+          TopLeft="20,27" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\Sucesso"
+          TopLeft="269,47" />
+        <NodeLayout
+          Size="107,42"
+          Id="Package\Falha"
+          TopLeft="268,101" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restrição]"
+          TopLeft="227,100">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="42,-32"
+              Start="0,0"
+              End="34.5,-32">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="17,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17,0"
+                    Point2="21,0"
+                    Point3="21,-4" />
+                  <mssgle:LineSegment
+                    End="21,-28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21,-28"
+                    Point2="21,-32"
+                    Point3="25,-32" />
+                  <mssgle:LineSegment
+                    End="34.5,-32" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restrição 1]"
+          TopLeft="227,122.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="41,0"
+              Start="0,0"
+              End="33.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="33.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="4.641640625,5,24.21671875,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\TaskRlt\rlt - AgregadoCervejaria">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="184,42"
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria"
+          TopLeft="34,21" />
+        <NodeLayout
+          Size="132,42"
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação"
+          TopLeft="60,99" />
+        <EdgeLayout
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Saída de Origem OLE DB]"
+          TopLeft="126,63">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="196,42"
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria"
+          TopLeft="30,186" />
+        <EdgeLayout
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Saída de Agregação 1]"
+          TopLeft="127,141">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
