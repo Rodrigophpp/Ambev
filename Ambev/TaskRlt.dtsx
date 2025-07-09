@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="TaskRlt"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{4C1F6324-B843-489B-A204-A2AED88F5114}">
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{B5CFB482-9DAE-4990-950D-5FB2B90EBF96}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1170,6 +1170,10 @@ FROM [transf].[MetadadosCervejaria] with(nolock)</property>
                           refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[DataInsercao]"
                           dataType="dbTimeStamp"
                           name="DataInsercao" />
+                        <externalMetadataColumn
+                          refId="Package\TaskRlt\rlt - AgregadoCervejaria\rlt - AgregadoCervejaria.Inputs[Entrada de Destino OLE DB].ExternalColumns[Id]"
+                          dataType="i4"
+                          name="Id" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -1558,6 +1562,14 @@ and AgregadoCervejaria.[State] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="164,42"
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria\Checa Existencia"
+          TopLeft="268.5,209.5" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria\Divisão Condicional"
+          TopLeft="294.5,319.5" />
+        <NodeLayout
           Size="184,42"
           Id="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria"
           TopLeft="258.5,5.5" />
@@ -1569,52 +1581,32 @@ and AgregadoCervejaria.[State] = ?</property>
           Size="132,42"
           Id="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação"
           TopLeft="284.5,107.5" />
-        <EdgeLayout
-          Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Saída de Origem OLE DB]"
-          TopLeft="350.5,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
-          Size="164,42"
-          Id="Package\TaskRlt\rlt - AgregadoCervejaria\Checa Existencia"
-          TopLeft="268.5,209.5" />
+          Size="114,42"
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria\Update"
+          TopLeft="322.5,408.5" />
         <EdgeLayout
-          Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Saída de Agregação 1]"
-          TopLeft="350.5,149.5">
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Update]"
+          TopLeft="381,361.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60"
+              EndConnector="0,47"
               Start="0,0"
-              End="0,52.5">
+              End="0,39.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.5" />
+                    End="0,39.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-16.28029296875,13.9453125,32.5605859375,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1653,10 +1645,28 @@ and AgregadoCervejaria.[State] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="176,42"
-          Id="Package\TaskRlt\rlt - AgregadoCervejaria\Divisão Condicional"
-          TopLeft="294.5,319.5" />
+        <EdgeLayout
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Saída de Origem OLE DB]"
+          TopLeft="350.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Saída de Correspondência de Pesquisa]"
           TopLeft="379.5,251.5">
@@ -1681,37 +1691,54 @@ and AgregadoCervejaria.[State] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="114,42"
-          Id="Package\TaskRlt\rlt - AgregadoCervejaria\Update"
-          TopLeft="322.5,408.5" />
         <EdgeLayout
-          Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Update]"
-          TopLeft="381,361.5">
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Saída de Agregação 1]"
+          TopLeft="350.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,47"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,39.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,39.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-16.28029296875,13.9453125,32.5605859375,11.609375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\TaskRlt\rlt - AgregadoCervejaria\Checa Existencia">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\TaskRlt\rlt - AgregadoCervejaria\MetadadosCervejaria">
     <Properties>
@@ -1730,29 +1757,6 @@ and AgregadoCervejaria.[State] = ?</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\TaskRlt\rlt - AgregadoCervejaria\Checa Existencia">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
