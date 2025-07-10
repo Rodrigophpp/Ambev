@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="TaskExtract"
   DTS:PackageType="5"
-  DTS:VersionBuild="38"
-  DTS:VersionGUID="{6BFE95FC-E349-4B21-8271-BE84A9234EB6}">
+  DTS:VersionBuild="44"
+  DTS:VersionGUID="{3AE0EA0F-6758-4BC0-B6CF-CC64C0C52617}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -88,7 +88,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Falha"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -105,7 +105,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="Sucesso"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1835,29 +1835,29 @@ where [refTable].[id] = ?</property>
         <NodeLayout
           Size="107,42"
           Id="Package\Falha"
-          TopLeft="392,136" />
+          TopLeft="303.5,147.5" />
         <NodeLayout
           Size="121,42"
           Id="Package\Sucesso"
-          TopLeft="394,71" />
+          TopLeft="300.5,92.5" />
         <NodeLayout
           Size="184,42"
           Id="Package\TaskExtract\Loop For\MetadadosCervejaria"
-          TopLeft="34,29" />
+          TopLeft="5.5,5.5" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="262,112"
-          Size="262,155"
+          PanelSize="195,103"
+          Size="195,146"
           Id="Package\TaskExtract\Loop For"
-          TopLeft="5.5,107.5" />
+          TopLeft="5.50000000000004,107.5" />
         <NodeLayout
           Size="168,42"
           Id="Package\TaskExtract\Pega Ultima Page"
-          TopLeft="52.5,5.5" />
+          TopLeft="19,5.5" />
         <EdgeLayout
           Id="Package\TaskExtract.PrecedenceConstraints[Restrição]"
-          TopLeft="136.5,47.5">
+          TopLeft="103,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -1880,36 +1880,36 @@ where [refTable].[id] = ?</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="273,318"
-          Size="273,361"
+          PanelSize="206,308"
+          Size="206,351"
           Id="Package\TaskExtract"
-          TopLeft="25,27" />
+          TopLeft="5.00000000000003,12.5" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restrição]"
-          TopLeft="298,148.333333333333">
+          TopLeft="211,131.166666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="96,-56.3333333333333"
+              EndConnector="89.5,-17.6666666666667"
               Start="0,0"
-              End="88.5,-56.3333333333333">
+              End="82,-17.6666666666667">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="34.6548672566372,0" />
+                    End="32.0429864253394,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="34.6548672566372,0"
-                    Point2="38.6548672566372,0"
-                    Point3="38.6548672566372,-4" />
+                    Point1="32.0429864253394,0"
+                    Point2="36.0429864253394,0"
+                    Point3="36.0429864253394,-4" />
                   <mssgle:LineSegment
-                    End="38.6548672566372,-52.3333333333333" />
+                    End="36.0429864253394,-13.6666666666667" />
                   <mssgle:CubicBezierSegment
-                    Point1="38.6548672566372,-52.3333333333333"
-                    Point2="38.6548672566372,-56.3333333333333"
-                    Point3="42.6548672566372,-56.3333333333333" />
+                    Point1="36.0429864253394,-13.6666666666667"
+                    Point2="36.0429864253394,-17.6666666666667"
+                    Point3="40.0429864253394,-17.6666666666667" />
                   <mssgle:LineSegment
-                    End="88.5,-56.3333333333333" />
+                    End="82,-17.6666666666667" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1920,37 +1920,37 @@ where [refTable].[id] = ?</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restrição 1]"
-          TopLeft="298,265.666666666667">
+          TopLeft="211,245.833333333333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="94,-108.666666666667"
+              EndConnector="92.5,-77.3333333333333"
               Start="0,0"
-              End="86.5,-108.666666666667">
+              End="85,-77.3333333333333">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="33.8495575221239,0" />
+                    End="33.2511312217194,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="33.8495575221239,0"
-                    Point2="37.8495575221239,0"
-                    Point3="37.8495575221239,-4" />
+                    Point1="33.2511312217194,0"
+                    Point2="37.2511312217194,0"
+                    Point3="37.2511312217194,-4" />
                   <mssgle:LineSegment
-                    End="37.8495575221239,-104.666666666667" />
+                    End="37.2511312217194,-73.3333333333333" />
                   <mssgle:CubicBezierSegment
-                    Point1="37.8495575221239,-104.666666666667"
-                    Point2="37.8495575221239,-108.666666666667"
-                    Point3="41.8495575221239,-108.666666666667" />
+                    Point1="37.2511312217194,-73.3333333333333"
+                    Point2="37.2511312217194,-77.3333333333333"
+                    Point3="41.2511312217194,-77.3333333333333" />
                   <mssgle:LineSegment
-                    End="86.5,-108.666666666667" />
+                    End="85,-77.3333333333333" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="25.7411981471239,1,24.21671875,9.7490234375"
+              BoundingBox="25.1427718467194,1,24.21671875,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1965,89 +1965,85 @@ where [refTable].[id] = ?</property>
         <NodeLayout
           Size="240,42"
           Id="Package\TaskExtract\Loop For\MetadadosCervejaria\JSON Source (REST API or File)"
-          TopLeft="28,27" />
+          TopLeft="5.5,5.5" />
         <NodeLayout
           Size="161,42"
           Id="Package\TaskExtract\Loop For\MetadadosCervejaria\Coluna Derivada"
-          TopLeft="71,106" />
+          TopLeft="45,107.5" />
         <NodeLayout
           Size="164,42"
           Id="Package\TaskExtract\Loop For\MetadadosCervejaria\Checa Existencia"
-          TopLeft="71,183" />
+          TopLeft="43.5,209.5" />
         <NodeLayout
           Size="184,42"
           Id="Package\TaskExtract\Loop For\MetadadosCervejaria\MetadadosCervejaria"
-          TopLeft="67,283" />
+          TopLeft="33.5,311.5" />
         <EdgeLayout
           Id="Package\TaskExtract\Loop For\MetadadosCervejaria.Paths[Saída Sem Correspondência de Pesquisa]"
-          TopLeft="156,225">
+          TopLeft="125.5,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,58"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,50.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,50.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-89.5940234375,19.15234375,179.188046875,12.1953125"
+              BoundingBox="-89.5940234375,20.15234375,179.188046875,12.1953125"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\TaskExtract\Loop For\MetadadosCervejaria.Paths[Saída de Coluna Derivada]"
-          TopLeft="152.25,148">
+          TopLeft="125.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,35"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,27.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\TaskExtract\Loop For\MetadadosCervejaria.Paths[JsonSourceOutput]"
-          TopLeft="149.75,69">
+          TopLeft="125.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,37"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,29.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

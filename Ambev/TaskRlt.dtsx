@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="TaskRlt"
   DTS:PackageType="5"
-  DTS:VersionBuild="10"
-  DTS:VersionGUID="{B5CFB482-9DAE-4990-950D-5FB2B90EBF96}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{A8D7300A-C7D3-4C47-83CB-89A9DF51CA6D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1562,6 +1562,10 @@ and AgregadoCervejaria.[State] = ?</property>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="114,42"
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria\Update"
+          TopLeft="322.5,408.5" />
+        <NodeLayout
           Size="164,42"
           Id="Package\TaskRlt\rlt - AgregadoCervejaria\Checa Existencia"
           TopLeft="268.5,209.5" />
@@ -1581,34 +1585,6 @@ and AgregadoCervejaria.[State] = ?</property>
           Size="132,42"
           Id="Package\TaskRlt\rlt - AgregadoCervejaria\Agregação"
           TopLeft="284.5,107.5" />
-        <NodeLayout
-          Size="114,42"
-          Id="Package\TaskRlt\rlt - AgregadoCervejaria\Update"
-          TopLeft="322.5,408.5" />
-        <EdgeLayout
-          Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Update]"
-          TopLeft="381,361.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,47"
-              Start="0,0"
-              End="0,39.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,39.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-16.28029296875,13.9453125,32.5605859375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Saída Sem Correspondência de Pesquisa]"
           TopLeft="324.5,251.5">
@@ -1711,6 +1687,30 @@ and AgregadoCervejaria.[State] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\TaskRlt\rlt - AgregadoCervejaria.Paths[Update]"
+          TopLeft="381,361.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-16.28029296875,13.9453125,32.5605859375,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

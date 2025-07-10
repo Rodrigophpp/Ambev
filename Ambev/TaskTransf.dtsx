@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="TaskTransf"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{1AEEC94C-9E90-4C5D-B164-629EBD9BB1DF}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{860A5E06-1276-4868-8931-3ACF2B006FD4}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1317,24 +1317,24 @@ FROM [extr].[MetadadosCervejaria] with(nolock)</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
+          Size="107,42"
+          Id="Package\Falha"
+          TopLeft="322,115" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\Sucesso"
+          TopLeft="323,61" />
+        <NodeLayout
           Size="224,42"
           Id="Package\TaskTransf\Transf - MetadadosCervejaria"
           TopLeft="5.5,5.5" />
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="235,102"
+          PanelSize="235,103"
           Size="235,146"
           Id="Package\TaskTransf"
           TopLeft="38,36" />
-        <NodeLayout
-          Size="121,42"
-          Id="Package\Sucesso"
-          TopLeft="323,61" />
-        <NodeLayout
-          Size="107,42"
-          Id="Package\Falha"
-          TopLeft="322,115" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restrição]"
           TopLeft="273,84">
@@ -1390,65 +1390,21 @@ FROM [extr].[MetadadosCervejaria] with(nolock)</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="184,42"
-          Id="Package\TaskTransf\Transf - MetadadosCervejaria\MetadadosCervejaria"
-          TopLeft="30,20" />
-        <NodeLayout
-          Size="161,42"
-          Id="Package\TaskTransf\Transf - MetadadosCervejaria\Coluna Derivada"
-          TopLeft="43,90" />
-        <EdgeLayout
-          Id="Package\TaskTransf\Transf - MetadadosCervejaria.Paths[Saída de Origem OLE DB]"
-          TopLeft="122.75,62">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,28"
-              Start="0,0"
-              End="0,20.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
           Size="221,42"
           Id="Package\TaskTransf\Transf - MetadadosCervejaria\transf - MetadadosCervejaria"
           TopLeft="13,244" />
         <NodeLayout
+          Size="161,42"
+          Id="Package\TaskTransf\Transf - MetadadosCervejaria\Coluna Derivada"
+          TopLeft="43,90" />
+        <NodeLayout
           Size="164,42"
           Id="Package\TaskTransf\Transf - MetadadosCervejaria\Checa Existencia"
           TopLeft="36,159" />
-        <EdgeLayout
-          Id="Package\TaskTransf\Transf - MetadadosCervejaria.Paths[Saída de Coluna Derivada]"
-          TopLeft="120.75,132">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,27"
-              Start="0,0"
-              End="0,19.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="184,42"
+          Id="Package\TaskTransf\Transf - MetadadosCervejaria\MetadadosCervejaria"
+          TopLeft="30,20" />
         <EdgeLayout
           Id="Package\TaskTransf\Transf - MetadadosCervejaria.Paths[Saída Sem Correspondência de Pesquisa]"
           TopLeft="120.75,201">
@@ -1473,17 +1429,53 @@ FROM [extr].[MetadadosCervejaria] with(nolock)</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\TaskTransf\Transf - MetadadosCervejaria.Paths[Saída de Origem OLE DB]"
+          TopLeft="122.75,62">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\TaskTransf\Transf - MetadadosCervejaria.Paths[Saída de Coluna Derivada]"
+          TopLeft="120.75,132">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\TaskTransf\Transf - MetadadosCervejaria\MetadadosCervejaria">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\TaskTransf\Transf - MetadadosCervejaria\transf - MetadadosCervejaria">
     <Properties>
@@ -1503,7 +1495,7 @@ FROM [extr].[MetadadosCervejaria] with(nolock)</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1513,8 +1505,16 @@ FROM [extr].[MetadadosCervejaria] with(nolock)</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\TaskTransf\Transf - MetadadosCervejaria\MetadadosCervejaria">
+    <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>

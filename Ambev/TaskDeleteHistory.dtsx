@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="TaskDeleteHistory"
   DTS:PackageType="5"
-  DTS:VersionBuild="9"
-  DTS:VersionGUID="{4B16D5F9-D6F9-4962-8777-48A1B1E6C658}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{679A3368-563E-4481-ACA6-549E09EB4FC2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -421,7 +421,7 @@ where Ativo=1</property>
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="191,114"
-          Size="191,156"
+          Size="191,157"
           Id="Package\TaskDeleteHistory\Loop Foreach"
           TopLeft="5.50000000000004,107.5" />
         <EdgeLayout
@@ -449,7 +449,7 @@ where Ativo=1</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="202,318"
+          PanelSize="202,319"
           Size="202,362"
           Id="Package\TaskDeleteHistory"
           TopLeft="32,16" />
@@ -462,13 +462,13 @@ where Ativo=1</property>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="145,42"
-          Id="Package\TaskDeleteHistory\Lista Tabela\DeleteHistory"
-          TopLeft="23,23" />
-        <NodeLayout
           Size="243,42"
           Id="Package\TaskDeleteHistory\Lista Tabela\Destino do Conjunto de Registros"
           TopLeft="26,99" />
+        <NodeLayout
+          Size="145,42"
+          Id="Package\TaskDeleteHistory\Lista Tabela\DeleteHistory"
+          TopLeft="23,23" />
         <EdgeLayout
           Id="Package\TaskDeleteHistory\Lista Tabela.Paths[Saída de Origem OLE DB]"
           TopLeft="95.5,65">
