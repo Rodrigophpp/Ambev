@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">LAPTOP-4A6UT0U9</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWkYvv6QvZkiHRbgWJGlFegAAAAACAAAAAAAQZgAAAAEAACAAAADARl6WqnQrTgRt8vGYIF4/3mur0jxsHwRX+1dW30/ovgAAAAAOgAAAAAIAACAAAACRegIjib0gJ2PzuQoecouTWLSFhOcqWDrpwAV07PWQwZAAAABRqllQZ5KUbTewKUbpG26nILkzth7gEbXj0kStd0nnkz8wEmyOOb1h0gNQpNFEKEqzTx0wu89ld8IBZpB6QikuA3lENZ1OF7wohKQb2R1f47+4ZsgbJtCWFlVE/cxeHeRZuXJJrmKLAXLM0QG0RagcMW6BCRd8GWlykubyMH2Uk6jTZwdFb86eONo/AWqqALZAAAAAAK+Ac3FBkjmV6m/aCX0y5AOTKRjeulh6hiMDocyEWx/djduHrmpkCZoA2gNbf3B425d4KsUpfQT/qcPiD7W1Mg==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWkYvv6QvZkiHRbgWJGlFegAAAAACAAAAAAAQZgAAAAEAACAAAACIMwSn2E0Q/3oeMCD2Pc6lRXKVjCqbgg2F52FYqr9j/QAAAAAOgAAAAAIAACAAAAD9rM5dW35XuCRcBgz/OuYOt4AiY82B+NcN/63UX49xo5AAAABRXs/9t0tk2Facvp4o/Ga1r3lpeorzDb4y2rJTE5BuEwK7C7VDSq2lOIcb1FoLXHwVYhmoyBeDtatYdTJXSqmEd61vFuZukAq5vDAfXaGF+Rk/G1QwpjGoHOwNtSkgVTsjjJ6Iz6Q/xctyZwuW1LhY5Ck4nXwm+NHjVhfbZdWe+2JHM1tFZq83hgkO/OUoWIpAAAAA4939r8H04leXWPu9YXTiHisOOmf7KYIMXel6HT04rLQqjbMnXKpMDO+AV7w0sIvs4WYCGiD571b88eawOaeIiw==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -848,7 +848,16 @@
     </Manifest>
   </DeploymentModelSpecificContent>
   <ControlFlowParts />
-  <Miscellaneous />
+  <Miscellaneous>
+    <ProjectItem>
+      <Name>Amostra de dados.xlsx</Name>
+      <FullPath>Amostra de dados.xlsx</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Documentação - PipeLine SSIS.pdf</Name>
+      <FullPath>Documentação - PipeLine SSIS.pdf</FullPath>
+    </ProjectItem>
+  </Miscellaneous>
   <Configurations>
     <Configuration>
       <Name>Development</Name>
