@@ -1,0 +1,2 @@
+docker run -d --name ApiAmbev -p 5785:5432 -e POSTGRES_DB=Ambev -e POSTGRES_USER=Postgres -e POSTGRES_PASSWORD=Postgres postgres:16.1
+
